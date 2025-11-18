@@ -1,89 +1,73 @@
+1. Project Title
+GreenRoot – An AI-Powered Crop Recommendation and Farm Management System.
 
-🌱 GreenRoot – Smart Agriculture Platform
+2. Problem Statement
+Many farmers face difficulties in selecting the right crop due to unpredictable weather, soil
+conditions, and market fluctuations.
+This leads to reduced yield and financial loss.
+GreenRoot helps farmers by providing AI-driven crop recommendations based on soil
+pH, temperature, and rainfall data.
+It also allows farmers to store, view, update, and manage farm data using an interactive
+web platform with a secure relational database.
 
-A full-stack MERN + Prisma application that helps farmers monitor farms, track soil health, manage crop recommendations, and optimize agricultural productivity using AI.
+3. System Architecture
+Frontend (React.js) → Backend (Node.js + Express API) → Database (MySQL) → AI Module (Flask / TensorFlow)
+Frontend → Backend (API) → Database
+Example stack:
+1. Frontend: React.js with React Router (for pages like Login, Dashboard, and Crop Suggestion)
+2. Backend: Node.js + Express.js REST API (handles CRUD + AI requests)
+3. Database:MySQL (Relational database with structured tables and relationships)
+4. Authentication: MySQL (Relational database with structured tables and relationships)
+5. AI Module: Python (Flask API) integrated with trained ML model
+6. Hosting:
+○ Frontend → Vercel / Netlify
+○ Backend → Render / Railway
+○ Database → MySQL on Aiven / Railway / PlanetScale
 
-📌 Features
-🔐 Authentication System
+4. Key Features
+  Category                             Features
+Authentication &          Secure farmer registration and login using JWT (with bcrypt password encryption)
+Authorization
 
-Sign Up / Login using JWT
+CRUD Operations (API + DB)   Farmers can create, read, update, and delete farm and soil data using REST APIs connected to MySQL tables.
 
-Access Token (15 min expiry)
+Search, Sort, Filter,        PaginationSQL queries support filtering by crop or region, sorting by pH or rainfall, and pagination using LIMIT/OFFSET.
 
-Refresh Token (7 days, hashed with bcrypt)
+AI Crop Recommendation      Suggests the best crop for given soil and weather parameters using a trained machine learning model.
 
-Logout + Token rotation
+Frontend Routing            Pages: Home, Login, Signup, Dashboard, Add Farm, Crop Recommendation.
 
-Protected routes using middleware
+Weather Integration         Fetches real-time temperature and rainfall data via the OpenWeather API.
 
-🚜 Farm Management
+Hosting                    Fully hosted: Frontend (Vercel/Netlify), Backend(Render/Railway), Database (MySQL).
 
-Add/Create farms
+5. Tech Stack
+Layer Technologies Used      Frontend React.js, React Router, Axios, TailwindCSS /Bootstrap
+Database MySQL (Relational)  Backend Node.js, Express.js
+Authentication               JWT, bcrypt
+AI Integration               Python (Flask API), TensorFlow / scikit-learn
 
-Update and delete farm details
+6. API Overview
+   Endpoint                Method                    Description                       Access
+  /api/auth/signup         POST                 Register new farmer                     Public
+  /api/auth/login          POST                 Authenticate farmer                     Public
+  /api/farms               GET       Get all farms (search, sort, filter, pagination using SQL queries) Authenticated
+/api/farms/:id             GET               Get single farm details                    Authenticated
+/api/farms                 POST                   Add new farm record                   Authenticated
+/api/farms/:id             PUT               Update existing farm details               Authenticated
+/api/farms/:id             DELETE                Delete farm record                     Authenticated
+/api/recommend             POST                AI crop recommendation                   Authenticated
+7.  Database Design
+    Main Tables:
+●Users
+○id, name, email, password
+●Farms
+○id, user_id, farm_name, location
+●SoilData
+○id, farm_id, ph, temperature, rainfall, recommended_crop
 
-Pagination + search support
+Relationships:
+●One user → many farms
+●One farm → one soil record
 
-Each farm tied to a user
-
-Clean Prisma models for relational farm → soil data
-
-🌍 Soil Data Tracking
-
-Add soil data (pH, temperature, rainfall, etc.)
-
-View soil history for each farm
-
-Helps drive AI-based crop recommendations
-
-🤖 AI Crop Recommendation (Day 4)
-
-Predict optimal crops based on soil parameters
-
-Trained ML model (Python) integrated with Node.js
-
-🎨 Frontend (React)
-
-Login / Signup pages
-
-Dashboard for farms
-
-Add/Edit farm forms
-
-Soil data entry & visualization
-
-Modern UI with Tailwind CSS
-
-🗄️ Database
-
-MySQL using Prisma ORM
-
-User, Farm, SoilData, RefreshToken models
-
-Fully relational structure
-
-🧩 Tech Stack
-Backend
-
-Node.js
-
-Express.js
-
-Prisma ORM
-
-JWT + Crypto + bcrypt
-
-MySQL
-
-Postman (API testing)
-
-Frontend
-
-React.js
-
-Axios
-
-Tailwind CSS
-
-React Router
-
+    
