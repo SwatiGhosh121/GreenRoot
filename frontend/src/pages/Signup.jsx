@@ -13,7 +13,7 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/signup", form);
+      await axios.post("https://greenroot.onrender.com/signup", form);
       alert("Signup Successful");
       navigate("/login");
     } catch (err) {

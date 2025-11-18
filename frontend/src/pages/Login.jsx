@@ -11,7 +11,7 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/login", form);
+      const response = await axios.post("https://greenroot.onrender.com/login", form);
       localStorage.setItem("token", response.data.token);
       alert("Login Successful");
     } catch (err) {
