@@ -34,31 +34,6 @@ export default function Login() {
     }
   }
 
-  async function testProtected() {
-    const token = localStorage.getItem("token");
-
-    try {
-      const res = await fetch("https://greenroot.onrender.com/update", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        console.log("Unauthorized or token expired");
-        return;
-      }
-
-      console.log(data.message);
-    } catch (err) {
-      console.error(err);
-      console.log("Error testing protected route");
-    }
-  }
-
   return (
     <div className="container">
       <h2>Welcome Back</h2>
@@ -73,13 +48,6 @@ export default function Login() {
         />
         <button type="submit">Login</button>
       </form>
-
-      <button
-        onClick={testProtected}
-        style={{ marginTop: "12px", background: "#52b788" }}
-      >
-        Test Protected Route
-      </button>
 
       <small>
         Don't have an account? <a href="/">Signup</a>
