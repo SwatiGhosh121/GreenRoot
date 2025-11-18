@@ -11,6 +11,10 @@ app.use(express.json());
 
 const SECRET = "just_a_trial_id_it_is_for_class";
 
+app.get('/', (req,res)=>{
+  res.status(200).send('server is running')
+})
+
 // SIGNUP
 app.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
@@ -103,4 +107,4 @@ app.post("/update", verifyToken, (req, res) => {
 });
 
 // SERVER START
-app.listen(3000, () => console.log("Server is running on port 3000"));
+app.listen(3000, () => console.log("Server is running on http://localhost:3000/"));
