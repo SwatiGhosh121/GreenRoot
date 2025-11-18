@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+  
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    width: 380px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+  }
+  
+  /* Headings */
+  .container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 700;
+  }
+  
+  /* Inputs */
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    transition: all 0.2s ease;
+  }
+  
+  input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.4);
+  }
+  
+  /* Buttons */
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #4a90e2;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  button:hover {
+    background: #357ab8;
+  }
+  
+  /* Link text */
+  small {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+  }
+  
+  small a {
+    color: #4a90e2;
+    text-decoration: none;
+  }
+  small a:hover {
+    text-decoration: underline;
+  }
+  
