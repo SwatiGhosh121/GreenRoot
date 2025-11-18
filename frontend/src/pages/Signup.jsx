@@ -17,7 +17,7 @@ export default function Signup() {
       alert("Signup Successful");
       navigate("/login");
     } catch (err) {
-      alert(err?.response?.data?.message || "Error signing up");
+      console.log(err?.response?.data?.message || "Error signing up");
     }
   }
 
