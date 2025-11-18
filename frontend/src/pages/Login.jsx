@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 
 export default function Login() {
@@ -10,12 +9,28 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     try {
-      const response = await axios.post("https://greenroot.onrender.com/login", form);
-      localStorage.setItem("token", response.data.token);
-      alert("Login Successful");
+      const res = await fetch("https://greenroot.onrender.com/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.log(data.error || "Error logging in");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      console.log("Login Successful");
     } catch (err) {
-      console.log(err?.response?.data?.error || "Error logging in");
+      console.error(err);
+      console.log("Something went wrong");
     }
   }
 
@@ -23,14 +38,24 @@ export default function Login() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axios.post(
-        "http://localhost:3000/update",
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      alert(res.data.message);
-    } catch {
-      alert("Unauthorized or token expired");
+      const res = await fetch("https://greenroot.onrender.com/update", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.log("Unauthorized or token expired");
+        return;
+      }
+
+      console.log(data.message);
+    } catch (err) {
+      console.error(err);
+      console.log("Error testing protected route");
     }
   }
 
@@ -40,11 +65,19 @@ export default function Login() {
 
       <form onSubmit={handleSubmit}>
         <input name="email" placeholder="Email" onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+        />
         <button type="submit">Login</button>
       </form>
 
-      <button onClick={testProtected} style={{ marginTop: "12px", background: "#52b788" }}>
+      <button
+        onClick={testProtected}
+        style={{ marginTop: "12px", background: "#52b788" }}
+      >
         Test Protected Route
       </button>
 

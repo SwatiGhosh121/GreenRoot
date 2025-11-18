@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,12 +11,28 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     try {
-      await axios.post("https://greenroot.onrender.com/signup", form);
-      alert("Signup Successful");
+      const res = await fetch("https://greenroot.onrender.com/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.log(data.message || "Error signing up");
+        return;
+      }
+
+      console.log("Signup Successful");
       navigate("/login");
     } catch (err) {
-      console.log(err?.response?.data?.message || "Error signing up");
+      console.error(err);
+      console.log("Something went wrong");
     }
   }
 
@@ -28,7 +43,12 @@ export default function Signup() {
       <form onSubmit={handleSubmit}>
         <input name="name" placeholder="Full Name" onChange={handleChange} />
         <input name="email" placeholder="Email" onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+        />
         <button type="submit">Signup</button>
       </form>
 
